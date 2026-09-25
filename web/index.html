@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>同步辐射光纤束路复核台</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>同步辐射光纤束路复核台</h1>
+    <p class="subtitle">
+      重接后束路等价性精确复核 · 辫群 B<sub>n</sub> Garside 左规范形 ·
+      复核计算在浏览器 Worker 中执行
+    </p>
+  </header>
+
+  <main>
+    <section class="panel" aria-label="输入参数">
+      <div class="row n-row">
+        <label for="fibers">光纤根数（按固定顺序 1…n 编号）</label>
+        <select id="fibers" aria-label="光纤根数">
+          <option value="2">2 根</option>
+          <option value="3">3 根</option>
+          <option value="4" selected>4 根</option>
+          <option value="5">5 根</option>
+          <option value="6">6 根</option>
+        </select>
+        <span class="hint">有效发生器：<strong id="genRange">σ1–σ3</strong>，σ<sub>i</sub> 交换第 i 与 i+1 根，支持 σi^-1 / -σi</span>
+      </div>
+
+      <div class="records">
+        <div class="record-col">
+          <div class="record-head">
+            <label for="recordA">记录 A（重接前）</label>
+            <span class="counter" id="counterA">0 / 80</span>
+          </div>
+          <textarea id="recordA" rows="4" spellcheck="false"
+            placeholder="例如：σ1 σ3"></textarea>
+        </div>
+        <div class="record-col">
+          <div class="record-head">
+            <label for="recordB">记录 B（重接后）</label>
+            <span class="counter" id="counterB">0 / 80</span>
+          </div>
+          <textarea id="recordB" rows="4" spellcheck="false"
+            placeholder="例如：σ3 σ1"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="btnReview" class="primary" type="button">开始复核</button>
+        <button id="btnCancel" type="button" disabled>取消计算</button>
+        <span id="workState" class="work-state" role="status" aria-live="polite"></span>
+        <span class="spacer"></span>
+        <fieldset class="examples">
+          <legend>业务样例填充</legend>
+          <button type="button" data-example="far">四纤：σ1σ3 ⇄ σ3σ1（远交换）</button>
+          <button type="button" data-example="braid">四纤：σ1σ2σ1 ⇄ σ2σ1σ2（编织关系）</button>
+          <button type="button" data-example="perm">两纤：σ1σ1 ⇄ 空记录（置换同而辫不等）</button>
+        </fieldset>
+      </div>
+    </section>
+
+    <section id="resultPanel" class="panel result hidden" aria-live="polite" aria-label="复核结论"></section>
+  </main>
+
+  <footer>
+    <span>判定依据：Δ-幂与左加权规范因子链的逐位比较（精确算法，不依赖置换、随机改写或有限次试变换）</span>
+  </footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

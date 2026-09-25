@@ -1,0 +1,7 @@
+FROM node:20-alpine
+
+# 零依赖：仅需 Node 运行时执行辫群业务样例测试、构建产物检查与 HTTP 冒烟
+WORKDIR /app
+COPY . /app
+
+CMD ["sh", "/app/tools/verify.sh"]

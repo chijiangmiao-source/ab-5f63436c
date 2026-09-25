@@ -1,0 +1,15 @@
+{
+  "name": "fiber-braid-review",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "同步辐射光纤束路重接等价性复核（辫群 Garside 规范形，Web Worker 精确判定）",
+  "scripts": {
+    "test": "node --test tests/",
+    "build-check": "node tools/build-check.mjs",
+    "serve": "node tools/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
